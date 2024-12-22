@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { read, utils } from "xlsx";
 import MCQCard from "./components/MCQCard";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [fileData, setFileData] = useState([]);
@@ -160,6 +161,7 @@ const App = () => {
           <p>Processing your file...</p>
         </div>
       )}
+      <Footer />
     </div>
   );
 };
