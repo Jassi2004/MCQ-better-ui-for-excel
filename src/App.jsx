@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { read, utils } from "xlsx";
 import MCQCard from "./components/MCQCard";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
   const [fileData, setFileData] = useState([]);
