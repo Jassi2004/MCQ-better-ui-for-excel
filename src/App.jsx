@@ -84,6 +84,9 @@ const App = () => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+  const handleNavigateToQuestion = (questionIndex) => {
+    setCurrentIndex(questionIndex);
+  };
 
   return (
     <div className="app">
@@ -152,6 +155,7 @@ const App = () => {
               total={fileData.length}
               nextQuestion={nextQuestion}
               prevQuestion={prevQuestion}
+              onNavigate={handleNavigateToQuestion}
             />
           </div>
         )}

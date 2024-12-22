@@ -488,3 +488,111 @@ button {
     position: relative;
     bottom: 0;
 }
+
+/* Add these new styles to your existing CSS */
+
+.question-nav-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.question-navigator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.question-navigator input {
+    width: 80px;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.question-navigator button {
+    padding: 0.5rem 1rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.question-navigator button:hover {
+    background: var(--primary-dark);
+}
+
+.metadata {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--background);
+    border-radius: 12px;
+}
+
+.metadata-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+@media (max-width: 768px) {
+    .question-nav-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .metadata {
+        grid-template-columns: 1fr;
+    }
+
+    .metadata-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .navigation {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .nav-btn {
+        flex: 1;
+        min-width: 0;
+        padding: 0.75rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mcq-card {
+        padding: 1rem;
+    }
+
+    .option-btn {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .question-navigator {
+        width: 100%;
+    }
+
+    .question-navigator form {
+        width: 100%;
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .question-navigator input {
+        flex: 1;
+        max-width: 120px;
+    }
+}

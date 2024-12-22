@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import QuestionNavigator from "./QuestionNavigator";
 
-const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion }) => {
+const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, onNavigate }) => {
     const [selectedAnswers, setSelectedAnswers] = useState({});
     const [revealedQuestions, setRevealedQuestions] = useState({});
     const [fadeIn, setFadeIn] = useState(true);
@@ -35,19 +36,26 @@ const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion }) 
             </div>
 
             <div className="header">
-                <h2>Question {currentIndex + 1} of {total}</h2>
+                <div className="question-nav-wrapper">
+                    <h2>Question {currentIndex + 1} of {total}</h2>
+                    <QuestionNavigator
+                        total={total}
+                        currentIndex={currentIndex}
+                        onNavigate={onNavigate}
+                    />
+                </div>
                 <div className="metadata">
-                    <div>
+                    <div className="metadata-item">
                         <strong>Topic</strong>
-                        {question.Topic}
+                        <span>{question.Topic}</span>
                     </div>
-                    <div>
+                    <div className="metadata-item">
                         <strong>Sub-Topic</strong>
-                        {question.Sub_Topic}
+                        <span>{question.Sub_Topic}</span>
                     </div>
-                    <div>
+                    <div className="metadata-item">
                         <strong>Level</strong>
-                        {question.Level}
+                        <span>{question.Level}</span>
                     </div>
                 </div>
             </div>
