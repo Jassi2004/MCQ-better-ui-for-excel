@@ -1,9 +1,19 @@
 import React, { useState, useEffect } from "react";
 import QuestionNavigator from "./QuestionNavigator";
+import { Bookmark, BookmarkX } from "lucide-react";
 
-const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, onNavigate }) => {
-    const [selectedAnswers, setSelectedAnswers] = useState({});
-    const [revealedQuestions, setRevealedQuestions] = useState({});
+const MCQCard = ({
+    question,
+    currentIndex,
+    total,
+    nextQuestion,
+    prevQuestion,
+    onNavigate,
+    onAnswer,
+    answer,
+    isMarked,
+    onToggleMark
+}) => {
     const [fadeIn, setFadeIn] = useState(true);
 
     useEffect(() => {
@@ -12,18 +22,10 @@ const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, on
     }, [currentIndex]);
 
     const handleOptionClick = (selectedOption) => {
-        setSelectedAnswers((prev) => ({
-            ...prev,
-            [currentIndex]: selectedOption,
-        }));
-        setRevealedQuestions((prev) => ({
-            ...prev,
-            [currentIndex]: true,
-        }));
+        onAnswer(selectedOption);
     };
 
-    const isAnswerRevealed = revealedQuestions[currentIndex] || false;
-    const selectedAnswer = selectedAnswers[currentIndex] || null;
+    const isAnswerRevealed = answer !== undefined;
     const progressPercentage = ((currentIndex + 1) / total) * 100;
 
     return (
@@ -37,7 +39,20 @@ const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, on
 
             <div className="header">
                 <div className="question-nav-wrapper">
-                    <h2>Question {currentIndex + 1} of {total}</h2>
+                    <div className="question-header">
+                        <h2>Question {currentIndex + 1} of {total}</h2>
+                        <button
+                            onClick={onToggleMark}
+                            className="mark-button"
+                            title={isMarked ? "Unmark question" : "Mark question for review"}
+                        >
+                            {isMarked ? (
+                                <BookmarkX className="text-blue-600" size={20} />
+                            ) : (
+                                <Bookmark className="text-gray-400" size={20} />
+                            )}
+                        </button>
+                    </div>
                     <QuestionNavigator
                         total={total}
                         currentIndex={currentIndex}
@@ -46,16 +61,16 @@ const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, on
                 </div>
                 <div className="metadata">
                     <div className="metadata-item">
-                        <strong>Topic</strong>
-                        <span>{question.Topic}</span>
+                        <strong>Topic: <span>{question.Topic}</span></strong>
+
                     </div>
                     <div className="metadata-item">
-                        <strong>Sub-Topic</strong>
-                        <span>{question.Sub_Topic}</span>
+                        <strong>Sub-Topic: <span>{question.Sub_Topic}</span></strong>
+
                     </div>
                     <div className="metadata-item">
-                        <strong>Level</strong>
-                        <span>{question.Level}</span>
+                        <strong>Level: <span>{question.Level}</span></strong>
+
                     </div>
                 </div>
             </div>
@@ -65,17 +80,17 @@ const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, on
                 <div className="options">
                     {["Option_1", "Option_2", "Option_3", "Option_4"].map((key) => {
                         const isCorrect = question.Correct_Answer === question[key];
-                        const isSelected = selectedAnswer === question[key];
+                        const isSelected = answer?.selected === question[key];
                         return (
                             <button
                                 key={key}
                                 className={`option-btn ${isAnswerRevealed
-                                        ? isCorrect
-                                            ? "correct"
-                                            : isSelected
-                                                ? "incorrect"
-                                                : ""
-                                        : ""
+                                    ? isCorrect
+                                        ? "correct"
+                                        : isSelected
+                                            ? "incorrect"
+                                            : ""
+                                    : ""
                                     }`}
                                 onClick={() => handleOptionClick(question[key])}
                                 disabled={isAnswerRevealed}
@@ -89,7 +104,7 @@ const MCQCard = ({ question, currentIndex, total, nextQuestion, prevQuestion, on
 
             {isAnswerRevealed && (
                 <div className="answer">
-                    {selectedAnswer === question.Correct_Answer ? (
+                    {answer.isCorrect ? (
                         <span className="correct-msg">✨ Excellent! That's correct!</span>
                     ) : (
                         <span className="incorrect-msg">

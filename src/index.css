@@ -1,5 +1,7 @@
 /* index.css */
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* CSS Reset and Base Styles */
 :root {
     --primary: #2563eb;
@@ -141,6 +143,19 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    top: 3%;
+    right: 10%;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
 }
 
 .current-status {
@@ -596,3 +611,5 @@ button {
         max-width: 120px;
     }
 }
+
+/* Add these styles to your existing CSS */
