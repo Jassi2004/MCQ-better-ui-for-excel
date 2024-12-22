@@ -1,12 +1,17 @@
 /* src/styles/Footer.css */
 
 .footer {
-    background-color: #222;
+    /* background-color: #222; */
     color: #fff;
-    padding: 30px 0;
+    /* padding: 30px 0; */
     font-family: Arial, sans-serif;
-    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1); */
     width: 100%;
+    background-color: #111;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 0.9rem;
+    margin-top: 20px;
 }
 
 .footer-content {
@@ -62,6 +67,7 @@
     margin-top: 20px;
 }
 
+/* 
 .footer-bottom p {
     margin: 0;
-}
+} */
