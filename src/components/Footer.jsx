@@ -6,7 +6,7 @@ import "./../styles/Footer.css";
 const Footer = () => {
     return (
         <footer className="footer">
-            <div className="footer-content">
+            {/* <div className="footer-content">
                 <div className="about">
                     <h3>About</h3>
                     <p>
@@ -28,15 +28,21 @@ const Footer = () => {
                             </a>
                         </li>
                         <li>
-                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                            <a href="https://linkedin.com/in/jaskirat-singh" target="_blank" rel="noopener noreferrer">
                                 LinkedIn
                             </a>
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> */}
             <div className="footer-bottom">
-                <p>&copy; {new Date().getFullYear()} MCQ Exam Preparation. All rights reserved.</p>
+                <p>
+                    Made with ❤️ by{" "}
+                    <a href="https://www.linkedin.com/in/jaskirat-singh-910256248/" target="_blank" rel="noopener noreferrer">
+                        Jaskirat Singh
+                    </a>
+                    . All rights reserved. &copy; {new Date().getFullYear()}
+                </p>
             </div>
         </footer>
     );
