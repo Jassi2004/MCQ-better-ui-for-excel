@@ -2,6 +2,7 @@
 
 import React from "react";
 import "./../styles/Footer.css";
+import { Link, Linkedin } from "lucide-react";
 
 const Footer = () => {
     return (
@@ -38,8 +39,8 @@ const Footer = () => {
             {/* <div className="footer-bottom"> */}
             <p>
                 Made with ❤️ by{" "}
-                <a href="https://www.linkedin.com/in/jaskirat-singh-910256248/" target="_blank" rel="noopener noreferrer">
-                    Jaskirat Singh
+                <a href="https://www.linkedin.com/in/jaskirat-singh-910256248/" className=" text-blue-500" target="_blank" rel="noopener noreferrer">
+                    Jaskirat Singh (Linkedin)
                 </a>
                 . All rights reserved. &copy; {new Date().getFullYear()}
             </p>

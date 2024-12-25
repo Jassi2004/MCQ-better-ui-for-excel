@@ -21,6 +21,34 @@ const MCQCard = ({
         return () => setFadeIn(false);
     }, [currentIndex]);
 
+    useEffect(() => {
+        const handleKeyPress = (e) => {
+            if (e.target.tagName === 'INPUT') return;
+
+            const optionKeys = {
+                '1': 'Option_1',
+                '2': 'Option_2',
+                '3': 'Option_3',
+                '4': 'Option_4',
+                'a': 'Option_1',
+                'b': 'Option_2',
+                'c': 'Option_3',
+                'd': 'Option_4'
+            };
+
+            if (!answer && optionKeys[e.key]) {
+                handleOptionClick(question[optionKeys[e.key]]);
+            } else if (e.key === 'Enter') {
+                if (answer && currentIndex < total - 1) {
+                    nextQuestion();
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyPress);
+        return () => window.removeEventListener('keydown', handleKeyPress);
+    }, [answer, currentIndex, question, nextQuestion, total]);
+
     const handleOptionClick = (selectedOption) => {
         onAnswer(selectedOption);
     };
@@ -62,15 +90,12 @@ const MCQCard = ({
                 <div className="metadata">
                     <div className="metadata-item">
                         <strong>Topic: <span>{question.Topic}</span></strong>
-
                     </div>
                     <div className="metadata-item">
                         <strong>Sub-Topic: <span>{question.Sub_Topic}</span></strong>
-
                     </div>
                     <div className="metadata-item">
                         <strong>Level: <span>{question.Level}</span></strong>
-
                     </div>
                 </div>
             </div>
@@ -78,9 +103,10 @@ const MCQCard = ({
             <div className="question-section">
                 <h3>{question.Question_Statement}</h3>
                 <div className="options">
-                    {["Option_1", "Option_2", "Option_3", "Option_4"].map((key) => {
+                    {["Option_1", "Option_2", "Option_3", "Option_4"].map((key, index) => {
                         const isCorrect = question.Correct_Answer === question[key];
                         const isSelected = answer?.selected === question[key];
+                        const keyHint = `(${index + 1}/${String.fromCharCode(97 + index)})`;
                         return (
                             <button
                                 key={key}
@@ -95,7 +121,7 @@ const MCQCard = ({
                                 onClick={() => handleOptionClick(question[key])}
                                 disabled={isAnswerRevealed}
                             >
-                                {question[key]}
+                                <span className="key-hint">{keyHint}</span> {question[key]}
                             </button>
                         );
                     })}
@@ -111,6 +137,7 @@ const MCQCard = ({
                             The correct answer is <strong>{question.Correct_Answer}</strong>
                         </span>
                     )}
+                    <p className="text-sm text-gray-500">Press Enter to go to next question</p>
                 </div>
             )}
 

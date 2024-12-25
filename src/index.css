@@ -15,7 +15,11 @@
     --text-secondary: #64748b;
     --border: #e2e8f0;
 }
-
+.key-hint {
+    color: #666;
+    font-size: 0.8em;
+    margin-right: 8px;
+  }
 *,
 *::before,
 *::after {
