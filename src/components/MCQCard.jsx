@@ -106,7 +106,7 @@ const MCQCard = ({
                     {["Option_1", "Option_2", "Option_3", "Option_4"].map((key, index) => {
                         const isCorrect = question.Correct_Answer === question[key];
                         const isSelected = answer?.selected === question[key];
-                        const keyHint = `(${index + 1}/${String.fromCharCode(97 + index)})`;
+                        const keyHint = `(${index + 1})`;
                         return (
                             <button
                                 key={key}
